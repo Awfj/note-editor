@@ -1,0 +1,14 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "message": "I wanna go to #shop",
+      "tags": "#shop #afwf"
+    },
+    {
+      "id": 2,
+      "message": "I'm at the #bar",
+      "tags": "#bar"
+    }
+  ]
+}
