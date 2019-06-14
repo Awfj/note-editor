@@ -2,13 +2,13 @@
   "notes": [
     {
       "id": 1,
-      "message": "I wanna go to #shop",
-      "tags": "#shop #afwf"
+      "message": "I wanna go to #shop and then #home",
+      "tags": ["#shop", "#home"]
     },
     {
       "id": 2,
       "message": "I'm at the #bar",
-      "tags": "#bar"
+      "tags": ["#bar"]
     }
   ]
 }

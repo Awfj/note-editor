@@ -1,5 +1,8 @@
 .note {
   border: 1px solid #000;
-  cursor: pointer;
   margin-bottom: 1em;
+  button {
+    cursor: pointer;
+    padding: .5em;
+  }
 }
