@@ -127,6 +127,7 @@ export default class Notes extends Component {
             removeNote={this.removeNoteHandler}
             removeTag={this.removeTagHandler}
             addTags={this.addTagsHandler}
+            {...this.props}
           />
         ));
       }

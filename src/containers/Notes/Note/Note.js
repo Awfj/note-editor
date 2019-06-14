@@ -22,7 +22,7 @@ const note = props => {
       </form>
     );
   }
-
+  console.log(props)
   return (
     <div className={classes.note}>
       <button>
