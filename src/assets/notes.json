@@ -9,6 +9,11 @@
       "id": 2,
       "message": "I'm at the #bar",
       "tags": ["#bar"]
+    },
+    {
+      "id": 3,
+      "message": "I'm at the #club and #bar",
+      "tags": ["#bar", "#club"]
     }
   ]
 }

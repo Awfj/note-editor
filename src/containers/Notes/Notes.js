@@ -12,7 +12,8 @@ export default class Notes extends Component {
     foundNotes: [],
     tags: null,
     includesTags: false,
-    isSearching: false
+    searching: false,
+    addingTags: false
   };
 
   addNoteHandler = event => {
@@ -31,6 +32,13 @@ export default class Notes extends Component {
 
     this.setState({ notes: updatedNotes, includesTags: false });
     addNoteform.message.value = "";
+  };
+
+  removeNoteHandler = noteIndex => {
+    const notes = this.state.notes;
+    const updatedNotes = notes.filter((_, index) => noteIndex !== index);
+
+    this.setState({ notes: updatedNotes });
   };
 
   changeHandler = event => {
@@ -52,68 +60,94 @@ export default class Notes extends Component {
     const notes = this.state.notes;
     let foundNotes = this.state.foundNotes;
 
-    foundNotes = notes.filter(note => {
-      let test = note.tags.filter(tag => tag.startsWith(searchValue)).join(" ");
-      console.log(test)
+    foundNotes = notes.filter(
+      note =>
+        note.tags.join(" ").startsWith(searchValue) ||
+        note.tags.join(" ").startsWith("#" + searchValue)
+    );
 
-      return note.tags.includes(test);
-    });
-    // console.log(foundNotes);
-
-    this.setState({ foundNotes, isSearching: true });
+    this.setState({ foundNotes, searching: true });
 
     if (searchValue.length === 0) {
-      this.setState({ isSearching: false });
+      this.setState({ searching: false });
     }
   };
 
-  removeNoteHandler = noteIndex => {
-    const notes = this.state.notes;
-    const updatedNotes = notes.filter((_, index) => noteIndex !== index);
+  addTagsHandler = noteIndex => {
+    // const notes = this.state.notes;
 
-    this.setState({ notes: updatedNotes });
+    // const updatedNotes = notes.filter((note, nIndex) => {
+    //   // console.log(note)
+    //   return;
+    // });
+
+    console.log(noteIndex);
+    this.setState({ addingTags: true });
+  };
+
+  removeTagHandler = (noteIndex, tagIndex) => {
+    const notes = this.state.notes;
+    const foundNotes = this.state.foundNotes;
+
+    const updatedNotes = notes.filter((note, nIndex) => {
+      if (nIndex === noteIndex) {
+        return (note.tags = note.tags.filter(
+          (_, tIndex) => tIndex !== tagIndex
+        ));
+      } else {
+        return note.tags;
+      }
+    });
+
+    const updatedFountNotes = foundNotes.filter((note, nIndex) => {
+      if (nIndex === noteIndex) {
+        return (note.tags = note.tags.filter(
+          (_, tIndex) => tIndex !== tagIndex
+        ));
+      } else {
+        return note.tags;
+      }
+    });
+
+    this.setState({ notes: updatedNotes, foundNotes: updatedFountNotes });
   };
 
   render() {
-    // console.log(this.state.foundNotes);
+    // console.log(this.state.addingTags);
     let notes = "There is no notes";
-    if (!this.state.isSearching) {
+    if (!this.state.searching) {
       if (this.state.notes.length !== 0) {
-        notes = this.state.notes.map((note, index) => {
-          return (
-            <Note
-              key={note.id}
-              index={index}
-              message={note.message}
-              tags={note.tags}
-              removeNote={this.removeNoteHandler}
-            />
-          );
-        });
-      }
-    } else {
-      notes = this.state.foundNotes.map((note, index) => {
-        return (
+        notes = this.state.notes.map((note, index) => (
           <Note
             key={note.id}
             index={index}
             message={note.message}
             tags={note.tags}
+            addingTags={this.state.addingTags}
             removeNote={this.removeNoteHandler}
+            removeTag={this.removeTagHandler}
+            addTags={this.addTagsHandler}
           />
-        );
-      });
+        ));
+      }
+    } else {
+      notes = this.state.foundNotes.map((note, index) => (
+        <Note
+          key={note.id}
+          index={index}
+          message={note.message}
+          tags={note.tags}
+          addingTags={this.state.addingTags}
+          removeNote={this.removeNoteHandler}
+          removeTag={this.removeTagHandler}
+          addTags={this.addTagsHandler}
+        />
+      ));
     }
 
-    let tags = null;
+    let tags = "There is no tags. Add a new one with #.";
     if (this.state.includesTags) {
-      tags = (
-        <ul>
-          {this.state.tags.map((tag, index) => (
-            <li key={index}>{tag}</li>
-          ))}
-        </ul>
-      );
+      tags = this.state.tags.map((tag, index) => <li key={index}>{tag}</li>);
     }
 
     return (
@@ -135,6 +169,7 @@ export default class Notes extends Component {
             cols="30"
             rows="10"
           />
+          <ul>Tags: </ul>
           {tags}
           <button>New Note</button>
         </form>
