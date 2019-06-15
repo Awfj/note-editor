@@ -1,31 +1,89 @@
 import React, { Component } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, Link } from "react-router-dom";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
-import Notes from "../../components/Notes/Notes";
+import notesJSON from "../../assets/notes.json";
+import Notes from "../Notes/Notes";
 import NoteDetails from "../NoteDetails/NoteDetails";
 
 library.add(fas);
+const uuidv4 = require("uuid/v4");
 
 class App extends Component {
+  state = {
+    notes: notesJSON.notes,
+    noteMessage: "",
+    noteTags: []
+  };
+
+  addNoteHandler = event => {
+    event.preventDefault();
+
+    const notes = this.state.notes;
+    const noteTags = this.state.noteTags;
+    const noteMessage = this.state.noteMessage;
+    if (!noteMessage) {
+      return;
+    }
+
+    const updatedNotes = [].concat(
+      { id: uuidv4(), message: noteMessage, tags: noteTags },
+      notes
+    );
+
+    this.setState({
+      notes: updatedNotes,
+      noteMessage: ""
+    });
+  };
+
+  changeHandler = event => {
+    const value = event.target.value;
+    const noteTags = value
+      .split(" ")
+      .filter(word => word.startsWith("#") && word.length !== 1);
+
+    this.setState({ noteTags, noteMessage: value });
+  };
+
+  removeNoteHandler = noteIndex => {
+    const notes = this.state.notes;
+    const updatedNotes = notes.filter((_, index) => noteIndex !== index);
+
+    this.setState({ notes: updatedNotes });
+  };
+
   render() {
+    // console.log(this.state.notes)
     return (
       <div className="App">
-        <h1>Notes Editor</h1>
+        <Link to="/note-editor">Note Editor</Link>
+        
         <Switch>
           {/* <Route path='/notes-editor' exact component={Notes} /> */}
           <Route
-            path="/notes-editor"
+            path="/note-editor"
             exact
-            render={props => <Notes {...props} />}
+            render={() => (
+              <Notes
+                notes={this.state.notes}
+                noteTags={this.state.noteTags}
+                noteMessage={this.state.noteMessage}
+                addNoteHandler={this.addNoteHandler}
+                changeHandler={this.changeHandler}
+                removeNoteHandler={this.removeNoteHandler}
+              />
+            )}
           />
           <Route
-            path="/notes-editor/:noteId"
-            render={props => <NoteDetails {...props} />}
+            path="/note-editor/edit/:noteId"
+            render={props => (
+              <NoteDetails notes={this.state.notes} {...props} />
+            )}
           />
-          <Redirect to="/notes-editor" />
+          <Redirect to="/note-editor" />
         </Switch>
       </div>
     );

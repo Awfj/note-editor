@@ -1,17 +1,17 @@
 {
   "notes": [
     {
-      "id": 1,
+      "id": "1",
       "message": "I wanna go to #shop and then #home",
       "tags": ["#shop", "#home"]
     },
     {
-      "id": 2,
+      "id": "2",
       "message": "I'm at the #bar",
       "tags": ["#bar"]
     },
     {
-      "id": 3,
+      "id": "3",
       "message": "I'm at the #club and #bar",
       "tags": ["#bar", "#club"]
     }
