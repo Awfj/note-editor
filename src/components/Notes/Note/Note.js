@@ -1,5 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 import classes from "./Note.module.scss";
 
@@ -22,9 +23,12 @@ const note = props => {
       </form>
     );
   }
-  console.log(props)
+  // console.log(props)
   return (
-    <div className={classes.note}>
+    <Link
+      to={{ pathname: "/notes-editor/edit/" + props.id }}
+      className={classes.note}
+    >
       <button>
         <FontAwesomeIcon icon={["fas", "edit"]} />
       </button>
@@ -39,7 +43,7 @@ const note = props => {
           <FontAwesomeIcon icon={["fas", "plus"]} />
         </button>
       </ul>
-    </div>
+    </Link>
   );
 };
 

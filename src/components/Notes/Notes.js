@@ -120,6 +120,7 @@ export default class Notes extends Component {
         notes = this.state.notes.map((note, index) => (
           <Note
             key={note.id}
+            id={note.id}
             index={index}
             message={note.message}
             tags={note.tags}
@@ -127,7 +128,7 @@ export default class Notes extends Component {
             removeNote={this.removeNoteHandler}
             removeTag={this.removeTagHandler}
             addTags={this.addTagsHandler}
-            {...this.props}
+            // {...this.props}
           />
         ));
       }
