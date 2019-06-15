@@ -78,9 +78,10 @@ export default class Notes extends Component {
             key={note.id}
             id={note.id}
             index={index}
-            message={note.message}
+            value={note.value}
             tags={note.tags}
             addingTags={this.state.addingTags}
+            location={this.props.location}
             removeNoteHandler={this.props.removeNoteHandler}
             removeTag={this.removeTagHandler}
             addTags={this.addTagsHandler}
@@ -92,7 +93,7 @@ export default class Notes extends Component {
         <Note
           key={note.id}
           index={index}
-          message={note.message}
+          value={note.value}
           tags={note.tags}
           addingTags={this.state.addingTags}
           removeNote={this.removeNoteHandler}
@@ -106,11 +107,13 @@ export default class Notes extends Component {
       <div className={classes.notes}>
         <NewNote
           addNoteHandler={this.props.addNoteHandler}
-          changeHandler={this.props.changeHandler}
+          changeAddNoteHandler={this.props.changeAddNoteHandler}
           notes={this.props.notes}
-          noteMessage={this.props.noteMessage}
+          noteValue={this.props.noteValue}
+          noteTags={this.props.noteTags}
         />
 
+        <h2>All Notes</h2>
         <form>
           <input
             onChange={this.searchHandler}

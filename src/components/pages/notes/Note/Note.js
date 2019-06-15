@@ -14,7 +14,7 @@ const note = props => {
   //     </form>
   //   );
   // }
-
+  // console.log(props)
   return (
     <div
       className={classes.note}
@@ -25,7 +25,7 @@ const note = props => {
       <button onClick={() => props.removeNoteHandler(props.index)}>
         <FontAwesomeIcon icon={["fas", "times"]} />
       </button>
-      <p>{props.message}</p>
+      <p>{props.value}</p>
       <Tags tags={props.tags} />
       {/* {addTagsFrom}
         <button onClick={() => props.addTags(props.index)}>

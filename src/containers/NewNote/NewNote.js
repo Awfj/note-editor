@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 
+import Tags from '../../components/shared/Tags/Tags';
+
 class NewNote extends Component {
   render() {
     return (
       <div>
-        <h1>New Note</h1>
+        <h2>New Note</h2>
         <form onSubmit={this.props.addNoteHandler}>
           <textarea
-            onChange={this.props.changeHandler}
+            onChange={this.props.changeAddNoteHandler}
             name="note"
-            cols="30"
             rows="10"
-            value={this.props.noteMessage}
+            value={this.props.noteValue}
           />
           <button>Add Note</button>
         </form>
+        <Tags tags={this.props.noteTags} />
       </div>
     );
   }
