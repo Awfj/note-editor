@@ -22,7 +22,7 @@ class NewNote extends Component {
           {success}
           <div className={classes.formGroup}>
             <button className={classes.submit}>Add Note</button>
-            <Tags tags={this.props.noteTags} />
+            <Tags tags={this.props.noteTags} tagsType="NoteTags" />
           </div>
         </form>
       </div>

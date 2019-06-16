@@ -7,7 +7,6 @@ export default class Notes extends Component {
   state = {
     foundNotes: [],
     searching: false,
-    addingTags: false
   };
 
   searchHandler = event => {
@@ -56,7 +55,7 @@ export default class Notes extends Component {
   };
 
   render() {
-    let notes = "There is no notes";
+    let notes = "There are no notes";
     if (!this.state.searching) {
       if (this.props.notes.length !== 0) {
         notes = this.props.notes.map((note, index) => (
@@ -66,8 +65,6 @@ export default class Notes extends Component {
             index={index}
             value={note.value}
             tags={note.tags}
-            addingTags={this.state.addingTags}
-            location={this.props.location}
             removeNoteHandler={this.props.removeNoteHandler}
             removeTag={this.removeTagHandler}
           />
@@ -77,10 +74,10 @@ export default class Notes extends Component {
       notes = this.state.foundNotes.map((note, index) => (
         <Note
           key={note.id}
+          id={note.id}
           index={index}
           value={note.value}
           tags={note.tags}
-          addingTags={this.state.addingTags}
           removeNote={this.removeNoteHandler}
           removeTag={this.removeTagHandler}
         />

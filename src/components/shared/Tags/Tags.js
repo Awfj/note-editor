@@ -10,7 +10,7 @@ const tags = props => {
   // let tagsClasses = '';
 
   // if (props.noteTagsClass) {
-  //   tagsClasses = 
+  //   tagsClasses =
   // }
 
   if (props.location && props.location.includes("/note-editor/edit/")) {
@@ -43,14 +43,15 @@ const tags = props => {
       <ul>
         {props.tags.map((tag, index) => (
           <div key={index} className={classes.listGroup}>
-            <li className={[classes.tags, classes[props.tagsType]].join(' ')}>{tag}</li>
+            <li className={[classes.tags, classes[props.tagsType]].join(" ")}>
+              {tag}
+            </li>
             {removeButton}
           </div>
         ))}
       </ul>
     );
   }
-  console.log(props)
   return (
     <div className={classes.tags}>
       {addTagForm}

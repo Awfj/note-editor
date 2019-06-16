@@ -23,7 +23,7 @@ const note = props => {
         </button>
       </div>
       <p>{props.value}</p>
-      <Tags tags={props.tags} tagsType="noteTags" />
+      <Tags tags={props.tags} tagsType="NoteTags" />
     </div>
   );
 };

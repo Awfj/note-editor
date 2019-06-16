@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+import axios from "axios";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "./App.module.scss";
-import notesJSON from "../../assets/notes.json";
+// import notesJSON from "../../assets/notes.json";
 import Notes from "../Notes/Notes";
 import NoteDetails from "../NoteDetails/NoteDetails";
 import NewNote from "../NewNote/NewNote";
@@ -16,12 +17,25 @@ const uuidv4 = require("uuid/v4");
 
 class App extends Component {
   state = {
-    notes: notesJSON.notes,
+    notes: [],
     noteValue: "",
     noteTags: [],
     noteAdded: false,
     enteredTags: [],
     test: []
+  };
+
+  componentDidMount() {
+    this.getNotes();
+  }
+
+  getNotes = () => {
+    axios
+      .get("/notes.json")
+      .then(response => this.setState({ notes: response.data.notes }))
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   addNoteHandler = event => {
@@ -165,6 +179,7 @@ class App extends Component {
   render() {
     // console.log(this.state.notes[0].tags);
     // console.log(this.state.test);
+
     return (
       <div className={classes.app}>
         <header>
