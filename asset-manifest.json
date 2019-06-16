@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/note-editor/static/css/main.385f2b1e.chunk.css",
+    "main.js": "/note-editor/static/js/main.e8428425.chunk.js",
+    "main.js.map": "/note-editor/static/js/main.e8428425.chunk.js.map",
+    "runtime~main.js": "/note-editor/static/js/runtime~main.3e3022e0.js",
+    "runtime~main.js.map": "/note-editor/static/js/runtime~main.3e3022e0.js.map",
+    "static/js/2.bdf50ed4.chunk.js": "/note-editor/static/js/2.bdf50ed4.chunk.js",
+    "static/js/2.bdf50ed4.chunk.js.map": "/note-editor/static/js/2.bdf50ed4.chunk.js.map",
+    "index.html": "/note-editor/index.html",
+    "precache-manifest.7406ee20c1e29a7d7986d089efed4dc5.js": "/note-editor/precache-manifest.7406ee20c1e29a7d7986d089efed4dc5.js",
+    "service-worker.js": "/note-editor/service-worker.js",
+    "static/css/main.385f2b1e.chunk.css.map": "/note-editor/static/css/main.385f2b1e.chunk.css.map"
+  }
+}
