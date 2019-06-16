@@ -7,13 +7,13 @@
     },
     {
       "id": "2",
-      "value": "I'm at the #bar",
-      "tags": ["#bar"]
+      "value": "I'm going #somewhere",
+      "tags": ["#somewhere"]
     },
     {
       "id": "3",
-      "value": "I'm at the #club and #bar",
-      "tags": ["#bar", "#club"]
+      "value": "I'm at #home",
+      "tags": ["#home"]
     }
   ]
 }

@@ -14,54 +14,15 @@
     align-items: center;
   }
   .tags {
-    border-top: 1px solid blue;
-    border-left: 1px solid blue;
-    border-bottom: 1px solid blue;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    font-size: 1rem;
-    padding: 0.5em;
-  }
-
-  .addButton,
-  .removeButton {
-    padding: 0.5em;
-    font-size: 1rem;
-  }
-  .addButton,
-  .removeButton {
     border: 1px solid blue;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    color: blue;
-    transition: 0.2s all ease-in-out;
-    &:hover {
-      border: 1px solid red;
-      color: red;
-    }
-  }
-}
-
-.addTagForm {
-  align-self: start;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  .newTagsInput {
-    border-top: 1px solid blue;
-    border-left: 1px solid blue;
-    border-bottom: 1px solid blue;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-radius: 5px;
     font-size: 1rem;
     padding: 0.5em;
   }
-}
 
-.NoteTags {
-  border-right: 1px solid blue;
-  border-radius: 5px;
-}
-
-.NewNote {
-  border-right: 1px solid blue;
+  .addButton,
+  .removeButton {
+    padding: 0.5em;
+    font-size: 1rem;
+  }
 }

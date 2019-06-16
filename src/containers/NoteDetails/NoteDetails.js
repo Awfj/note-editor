@@ -23,21 +23,12 @@ class NoteDetails extends Component {
             <textarea
               name="note-details"
               value={currentNote.value}
-              cols="30"
-              rows="10"
               onChange={event =>
-                this.props.changeEditNoteHandler(event, noteId)
+                this.props.onChangeEditNoteHandler(event, noteId)
               }
             />
           </form>
-          <Tags
-            tags={currentNote.tags}
-            noteId={noteId}
-            enteredTags={this.props.enteredTags}
-            addTagsHandler={this.props.addTagsHandler}
-            changeAddTagHandler={this.props.changeAddTagHandler}
-            location={this.props.location.pathname}
-          />
+          <Tags tags={currentNote.tags} />
         </div>
       );
     }

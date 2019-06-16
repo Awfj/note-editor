@@ -14,15 +14,15 @@ class NewNote extends Component {
         <h2>New Note</h2>
         <form onSubmit={this.props.addNoteHandler}>
           <textarea
-            onChange={this.props.changeAddNoteHandler}
             name="note"
             placeholder="Type something... New tags are created with #."
             value={this.props.noteValue}
+            onChange={this.props.onChangeNewNoteHandler}
           />
           {success}
           <div className={classes.formGroup}>
             <button className={classes.submit}>Add Note</button>
-            <Tags tags={this.props.noteTags} tagsType="NoteTags" />
+            <Tags tags={this.props.noteTags} />
           </div>
         </form>
       </div>

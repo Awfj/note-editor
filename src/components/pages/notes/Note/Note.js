@@ -17,7 +17,7 @@ const note = props => {
         </Link>
         <button
           className={classes.remove}
-          onClick={() => props.removeNoteHandler(props.index)}
+          onClick={() => props.removeNoteHandler(props.id)}
         >
           <FontAwesomeIcon icon={["fas", "times"]} />
         </button>
