@@ -16,7 +16,8 @@ class App extends Component {
     notes: notesJSON.notes,
     noteValue: "",
     noteTags: [],
-    enteredTags: []
+    enteredTags: [],
+    test: []
   };
 
   addNoteHandler = event => {
@@ -57,10 +58,8 @@ class App extends Component {
     const note = { ...notes[noteIndex] };
     const enteredTags = this.state.enteredTags;
 
-    // console.log(typeof enteredTags);
-
     const tags = enteredTags
-      .filter(tag => tag !== '#' && Boolean(tag) !== false)
+      .filter(tag => tag !== "#" && Boolean(tag))
       .map(tag => {
         if (!tag.startsWith("#") && tag.length !== 0) {
           return (tag = "#" + tag);
@@ -68,11 +67,21 @@ class App extends Component {
           return tag;
         }
       });
-    let noteTags = note.tags.concat(tags);
 
-    note.tags = noteTags;
+    const noteTags = note.tags.concat(tags);
+
+    let updatedNoteTags = [];
+    noteTags.map(tag => {
+      if (!updatedNoteTags.includes(tag)) {
+        return (updatedNoteTags = updatedNoteTags.concat(tag));
+      } else {
+        return updatedNoteTags;
+      }
+    });
+
+    note.tags = updatedNoteTags;
     notes[noteIndex] = note;
-    this.setState({ notes, enteredTags: [] });
+    this.setState({ notes, enteredTags: [], test: updatedNoteTags });
   };
 
   changeAddNoteHandler = event => {
@@ -89,40 +98,82 @@ class App extends Component {
     const noteIndex = notes.findIndex(note => note.id === noteId);
     const note = { ...notes[noteIndex] };
     const value = event.target.value;
-    const noteTags = value
+
+    // const noteTags = [...note.tags];
+
+    const test = [...this.state.test];
+
+    let tags = value
       .split(" ")
       .filter(word => word.startsWith("#") && word.length !== 1);
-    // const enteredTags = value
-    //   .split(" ")
-    //   .filter(word => word.startsWith("#") && word.length !== 1);
 
-    note.value = value;
-    note.tags = noteTags;
-    // note.tags = note.tags.concat(enteredTags);
+    let a = tags.concat(test);
 
-    // let tags = [];
-    // note.tags.map(tag => {
-    //   if(!tags.includes(tag)) {
-    //     return tags.push(tag)
+    let updatedTags = [];
+    a.map(tag => {
+      if (!updatedTags.includes(tag)) {
+        return (updatedTags = updatedTags.concat(tag));
+      } else {
+        return updatedTags;
+      }
+    });
+    // let updatedTags = [];
+    // tags.map(tag => {
+    //   if (!updatedTags.includes(tag)) {
+    //     return (updatedTags = updatedTags.concat(tag));
+    //   } else {
+    //     return updatedTags;
     //   }
     // });
 
-    // note.tags = tags;
+    // let test = noteTags.filter(tag => !updatedTags.includes(tag));
+    // let test = noteTags.concat(updatedTags);
+
+    // let updatedTest = [];
+    // test.map(tag => {
+    //   if (!updatedTest.includes(tag)) {
+    //     return (updatedTest = updatedTest.concat(tag));
+    //   } else {
+    //     return updatedTest;
+    //   }
+    // });
+
+    // console.log(updatedTest);
+
+    // let a = tags.concat(test);
+    console.log(updatedTags);
+
+    // let addedTags = [];
+    // if (noteTags.length > tags.length) {
+    //   addedTags = noteTags.slice(tags.length);
+    // } else if (addedTags.length === 0) {
+    //   console.log("111");
+    //   // console.log(addedTags);
+    //   if (noteTags.length === tags.length) {
+    //     console.log("214");
+    //     addedTags = noteTags.slice(tags.length - 1);
+    //   }
+    // }
+
+    // let a = tags.concat(addedTags);
+
+    note.value = value;
+    note.tags = tags;
+
     notes[noteIndex] = note;
-    // console.log(tags);
-    // console.log(enteredTags)
 
     this.setState({ notes });
   };
 
   changeAddTagHandler = event => {
-    const value = event.target.value.split(' ');
+    const value = event.target.value.split(" ");
 
     this.setState({ enteredTags: value });
   };
 
   render() {
-    // console.log(this.state.enteredTags);
+    console.log(this.state.notes[0].tags);
+    // console.log(this.state.test);
     return (
       <div className="App">
         <Link to="/note-editor">Note Editor</Link>
