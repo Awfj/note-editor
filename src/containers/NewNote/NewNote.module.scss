@@ -1,0 +1,30 @@
+.newNote {
+  form {
+    display: grid;
+  }
+  .success {
+    border: 1px solid green;
+    border-radius: 5px;
+    color: green;
+    margin: 0 0 1em;
+    padding: 1em;
+  }
+  .formGroup {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 1em;
+  }
+  .submit {
+    border: 1px solid blue;
+    border-radius: 5px;
+    color: blue;
+    font-size: 1.1em;
+    padding: 0.8em 1.5em;
+    align-self: start;
+    transition: 0.2s all ease-in-out;
+    &:hover {
+      color: red;
+      border: 1px solid red;
+    }
+  }
+}

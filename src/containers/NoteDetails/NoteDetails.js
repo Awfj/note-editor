@@ -18,7 +18,8 @@ class NoteDetails extends Component {
     } else {
       body = (
         <div className={classes.noteDetails}>
-          <form>
+          <h2>Edit Note</h2>
+          <form className={classes.editNoteForm}>
             <textarea
               name="note-details"
               value={currentNote.value}
@@ -40,7 +41,6 @@ class NoteDetails extends Component {
         </div>
       );
     }
-    // console.log(this.props)
     return <Fragment>{body}</Fragment>;
   }
 }

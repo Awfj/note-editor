@@ -6,31 +6,24 @@ import classes from "./Note.module.scss";
 import Tags from "../../../shared/Tags/Tags";
 
 const note = props => {
-  // let addTagsFrom = null;
-  // if (props.addingTags) {
-  //   addTagsFrom = (
-  //     <form>
-  //       <input type="text" />
-  //     </form>
-  //   );
-  // }
-  // console.log(props)
   return (
-    <div
-      className={classes.note}
-    >
-      <Link to={{ pathname: "/note-editor/edit/" + props.id }}>
-        <FontAwesomeIcon icon={["fas", "edit"]} />
-      </Link>
-      <button onClick={() => props.removeNoteHandler(props.index)}>
-        <FontAwesomeIcon icon={["fas", "times"]} />
-      </button>
+    <div className={classes.note}>
+      <div className={classes.icons}>
+        <Link
+          className={classes.edit}
+          to={{ pathname: "/note-editor/edit/" + props.id }}
+        >
+          <FontAwesomeIcon icon={["fas", "edit"]} />
+        </Link>
+        <button
+          className={classes.remove}
+          onClick={() => props.removeNoteHandler(props.index)}
+        >
+          <FontAwesomeIcon icon={["fas", "times"]} />
+        </button>
+      </div>
       <p>{props.value}</p>
-      <Tags tags={props.tags} />
-      {/* {addTagsFrom}
-        <button onClick={() => props.addTags(props.index)}>
-          <FontAwesomeIcon icon={["fas", "plus"]} />
-        </button> */}
+      <Tags tags={props.tags} tagsType="noteTags" />
     </div>
   );
 };

@@ -1,13 +1,39 @@
 .note {
-  border: 1px solid #000;
+  border: 1px solid blue;
+  border-radius: 5px;
   color: black;
-  display: block;
+  display: grid;
+  align-content: start;
   margin-bottom: 1em;
   padding: 1em;
   text-decoration: none;
   button {
     cursor: pointer;
     padding: 0.5em;
+  }
+  .icons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+  }
+  .edit,
+  .remove {
+    border: 1px solid blue;
+    border-radius: 5px;
+    padding: 0.5em;
+    font-size: 1rem;
+    color: blue;
+    transition: 0.2s all ease-in-out;
+    &:hover {
+      color: red;
+      border: 1px solid red;
+    }
+  }
+  .edit {
+    justify-self: start;
+  }
+  .remove {
+    justify-self: end;
   }
   // li {
   //   border: 1px solid #000;

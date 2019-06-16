@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import classes from "./Notes.module.scss";
 import Note from "../../components/pages/notes/Note/Note";
-import NewNote from "../NewNote/NewNote";
 
 export default class Notes extends Component {
   state = {
@@ -27,18 +26,6 @@ export default class Notes extends Component {
     if (searchValue.length === 0) {
       this.setState({ searching: false });
     }
-  };
-
-  addTagsHandler = noteIndex => {
-    // const notes = this.props.notes;
-
-    // const updatedNotes = notes.filter((note, nIndex) => {
-    //   // console.log(note)
-    //   return;
-    // });
-
-    // console.log(noteIndex);
-    this.setState({ addingTags: true });
   };
 
   removeTagHandler = (noteIndex, tagIndex) => {
@@ -69,7 +56,6 @@ export default class Notes extends Component {
   };
 
   render() {
-    // console.log(this.state.addingTags);
     let notes = "There is no notes";
     if (!this.state.searching) {
       if (this.props.notes.length !== 0) {
@@ -84,7 +70,6 @@ export default class Notes extends Component {
             location={this.props.location}
             removeNoteHandler={this.props.removeNoteHandler}
             removeTag={this.removeTagHandler}
-            addTags={this.addTagsHandler}
           />
         ));
       }
@@ -98,30 +83,22 @@ export default class Notes extends Component {
           addingTags={this.state.addingTags}
           removeNote={this.removeNoteHandler}
           removeTag={this.removeTagHandler}
-          addTags={this.addTagsHandler}
         />
       ));
     }
 
     return (
-      <div className={classes.notes}>
-        <NewNote
-          addNoteHandler={this.props.addNoteHandler}
-          changeAddNoteHandler={this.props.changeAddNoteHandler}
-          notes={this.props.notes}
-          noteValue={this.props.noteValue}
-          noteTags={this.props.noteTags}
-        />
-
+      <div>
         <h2>All Notes</h2>
         <form>
           <input
+            className={classes.search}
             onChange={this.searchHandler}
             type="text"
             placeholder="Search by tag..."
           />
         </form>
-        {notes}
+        <div className={classes.notes}>{notes}</div>
       </div>
     );
   }

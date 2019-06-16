@@ -1,6 +1,25 @@
 .notes {
-  padding: 15px 0;
-  form {
-    display: grid;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1em;
+}
+
+.search {
+  border: 1px solid blue;
+  border-radius: 5px;
+  margin-bottom: 1em;
+  padding: 1em;
+  width: 100%;
+}
+
+@media (min-width: 500px) {
+  .notes {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .notes {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }

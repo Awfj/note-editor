@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import { Route, Switch, Redirect, Link } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
+import classes from "./App.module.scss";
 import notesJSON from "../../assets/notes.json";
 import Notes from "../Notes/Notes";
 import NoteDetails from "../NoteDetails/NoteDetails";
+import NewNote from "../NewNote/NewNote";
+import Navigation from "../../components/Navigation/Navigation";
 
 library.add(fas);
 const uuidv4 = require("uuid/v4");
@@ -16,6 +19,7 @@ class App extends Component {
     notes: notesJSON.notes,
     noteValue: "",
     noteTags: [],
+    noteAdded: false,
     enteredTags: [],
     test: []
   };
@@ -38,6 +42,7 @@ class App extends Component {
 
     this.setState({
       notes: updatedNotes,
+      noteAdded: true,
       noteValue: "",
       noteTags: []
     });
@@ -68,6 +73,15 @@ class App extends Component {
         }
       });
 
+    let updatedTags = [];
+    tags.map(tag => {
+      if (!updatedTags.includes(tag)) {
+        return (updatedTags = updatedTags.concat(tag));
+      } else {
+        return updatedTags;
+      }
+    });
+
     const noteTags = note.tags.concat(tags);
 
     let updatedNoteTags = [];
@@ -81,7 +95,7 @@ class App extends Component {
 
     note.tags = updatedNoteTags;
     notes[noteIndex] = note;
-    this.setState({ notes, enteredTags: [], test: updatedNoteTags });
+    this.setState({ notes, enteredTags: [], test: updatedTags });
   };
 
   changeAddNoteHandler = event => {
@@ -90,7 +104,7 @@ class App extends Component {
       .split(" ")
       .filter(word => word.startsWith("#") && word.length !== 1);
 
-    this.setState({ noteTags, noteValue: value });
+    this.setState({ noteTags, noteValue: value, noteAdded: false });
   };
 
   changeEditNoteHandler = (event, noteId) => {
@@ -102,12 +116,28 @@ class App extends Component {
     // const noteTags = [...note.tags];
 
     const test = [...this.state.test];
+    let updatedTest = [];
+    // console.log(updatedTest)
+    updatedTest.push(test.join(" "));
+    // const test = [...this.state.test];
+    // console.log(test)
+
+    // let updatedTest2 = []
+    // updatedTest.map(tag => {
+    //   if (!updatedTest2.includes(tag)) {
+    //     return (updatedTest2 = updatedTest2.concat(tag));
+    //   } else {
+    //     return updatedTest2;
+    //   }
+    // });
+    // test.push(test.join(' '))
+    // console.log(updatedTest)
 
     let tags = value
       .split(" ")
       .filter(word => word.startsWith("#") && word.length !== 1);
 
-    let a = tags.concat(test);
+    let a = tags.concat(updatedTest);
 
     let updatedTags = [];
     a.map(tag => {
@@ -117,48 +147,9 @@ class App extends Component {
         return updatedTags;
       }
     });
-    // let updatedTags = [];
-    // tags.map(tag => {
-    //   if (!updatedTags.includes(tag)) {
-    //     return (updatedTags = updatedTags.concat(tag));
-    //   } else {
-    //     return updatedTags;
-    //   }
-    // });
-
-    // let test = noteTags.filter(tag => !updatedTags.includes(tag));
-    // let test = noteTags.concat(updatedTags);
-
-    // let updatedTest = [];
-    // test.map(tag => {
-    //   if (!updatedTest.includes(tag)) {
-    //     return (updatedTest = updatedTest.concat(tag));
-    //   } else {
-    //     return updatedTest;
-    //   }
-    // });
-
-    // console.log(updatedTest);
-
-    // let a = tags.concat(test);
-    console.log(updatedTags);
-
-    // let addedTags = [];
-    // if (noteTags.length > tags.length) {
-    //   addedTags = noteTags.slice(tags.length);
-    // } else if (addedTags.length === 0) {
-    //   console.log("111");
-    //   // console.log(addedTags);
-    //   if (noteTags.length === tags.length) {
-    //     console.log("214");
-    //     addedTags = noteTags.slice(tags.length - 1);
-    //   }
-    // }
-
-    // let a = tags.concat(addedTags);
 
     note.value = value;
-    note.tags = tags;
+    note.tags = updatedTags;
 
     notes[noteIndex] = note;
 
@@ -172,43 +163,56 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.notes[0].tags);
+    // console.log(this.state.notes[0].tags);
     // console.log(this.state.test);
     return (
-      <div className="App">
-        <Link to="/note-editor">Note Editor</Link>
+      <div className={classes.app}>
+        <header>
+          <Navigation />
+        </header>
 
-        <Switch>
-          <Route
-            path="/note-editor"
-            exact
-            render={props => (
-              <Notes
-                notes={this.state.notes}
-                noteTags={this.state.noteTags}
-                noteValue={this.state.noteValue}
-                addNoteHandler={this.addNoteHandler}
-                changeAddNoteHandler={this.changeAddNoteHandler}
-                removeNoteHandler={this.removeNoteHandler}
-                {...props}
-              />
-            )}
-          />
-          <Route
-            path="/note-editor/edit/:noteId"
-            render={props => (
-              <NoteDetails
-                notes={this.state.notes}
-                enteredTags={this.state.enteredTags}
-                changeEditNoteHandler={this.changeEditNoteHandler}
-                addTagsHandler={this.addTagsHandler}
-                changeAddTagHandler={this.changeAddTagHandler}
-                {...props}
-              />
-            )}
-          />
-          <Redirect to="/note-editor" />
-        </Switch>
+        <main>
+          <Switch>
+            <Route
+              path="/note-editor"
+              exact
+              render={props => (
+                <Notes
+                  notes={this.state.notes}
+                  removeNoteHandler={this.removeNoteHandler}
+                  {...props}
+                />
+              )}
+            />
+            <Route
+              path="/note-editor/new-note"
+              render={() => (
+                <NewNote
+                  notes={this.state.notes}
+                  noteValue={this.state.noteValue}
+                  noteTags={this.state.noteTags}
+                  noteAdded={this.state.noteAdded}
+                  addNoteHandler={this.addNoteHandler}
+                  changeAddNoteHandler={this.changeAddNoteHandler}
+                />
+              )}
+            />
+            <Route
+              path="/note-editor/edit/:noteId"
+              render={props => (
+                <NoteDetails
+                  notes={this.state.notes}
+                  enteredTags={this.state.enteredTags}
+                  changeEditNoteHandler={this.changeEditNoteHandler}
+                  addTagsHandler={this.addTagsHandler}
+                  changeAddTagHandler={this.changeAddTagHandler}
+                  {...props}
+                />
+              )}
+            />
+            <Redirect to="/note-editor" />
+          </Switch>
+        </main>
       </div>
     );
   }

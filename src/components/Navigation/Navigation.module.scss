@@ -1,0 +1,21 @@
+.logo,
+.newNote {
+  display: inline-block;
+  border: 1px solid blue;
+  border-radius: 5px;
+  color: blue;
+  font-size: 1.2rem;
+  margin-right: 1em;
+  padding: 0.5em;
+  text-decoration: none;
+  transition: 0.2s all ease-in-out;
+  &:hover {
+    color: red;
+    border: 1px solid red;
+  }
+}
+
+.active {
+  border: 1px solid red;
+  color: red;
+}
