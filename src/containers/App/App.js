@@ -82,9 +82,15 @@ class App extends Component {
 
   onChangeEditNoteHandler = (event, noteId) => {
     const value = event.target.value;
-    const noteTags = value
-      .split(" ")
-      .filter(word => word.startsWith("#") && word.length !== 1);
+    const noteTags = value.split(" ").filter(word => {
+      const conditions = [",", "."];
+      
+      return (
+        word.startsWith("#") &&
+        !conditions.some(el => word.includes(el)) &&
+        word.length !== 1
+      );
+    });
 
     let notes = [...this.state.notes];
     const noteIndex = notes.findIndex(note => note.id === noteId);
@@ -97,9 +103,15 @@ class App extends Component {
 
   onChangeNewNoteHandler = event => {
     const value = event.target.value;
-    const noteTags = value
-      .split(" ")
-      .filter(word => word.startsWith("#") && word.length !== 1);
+    const noteTags = value.split(" ").filter(word => {
+      const conditions = [",", "."];
+
+      return (
+        word.startsWith("#") &&
+        !conditions.some(el => word.includes(el)) &&
+        word.length !== 1
+      );
+    });
 
     this.setState({ noteTags, noteValue: value, noteAdded: false });
   };
